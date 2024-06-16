@@ -1,0 +1,64 @@
+﻿@model Product
+
+<section class="contact_section layout_padding-bottom">
+    <div class="container-fluid">
+        <div class="text-center">
+            <div class="text-center">
+                <h2>
+                    Ürün Ekle
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-5 offset-md-4 mt-4 text-center">
+            <div class="form_container text-center">
+                <form asp-action="Create" asp-controller="Product" method="post">
+                 <div>
+                        <input asp-for="Name" class="form-control" placeholder="Ürün İsim" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <input asp-for="Description" class="form-control" placeholder="Açıklama"/>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <input asp-for="Price" class="form-control" placeholder="Fiyat" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <input asp-for="Stock" class="form-control" placeholder="Stok Miktarı" />
+                        <span asp-validation-for="Stock" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <input asp-for="ImagePath" class="form-control" placeholder="Resim Dosya Yolu" />
+                        <span asp-validation-for="ImagePath" class="text-danger"></span>
+                    </div>
+                    <div class="btn_box">
+                        <button type="submit">
+                            <i class="fa-sharp fa-regular fa-floppy-disk" style="color: #ffffff;"></i>
+                            Kaydet
+                        </button>
+                    </div>
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="container mt-4">
+                            <div class="alert alert-success text-center" role="alert">
+                                @TempData["SuccessMessage"]
+                            </div>
+                        </div>
+                    }
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="container mt-4">
+                            <div class="alert alert-success text-center" role="alert">
+                                @TempData["ErrorMessage"]
+                            </div>
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</section>

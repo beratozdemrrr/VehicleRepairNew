@@ -1,0 +1,58 @@
+﻿@model RepairProcessViewModel
+
+<section class="contact_section layout_padding-bottom">
+    <div class="container-fluid">
+        <div class="text-center">
+            <div class="text-center">
+                <h2>
+                    Tamir İşlemi Ekle
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-5 offset-md-4 mt-4 text-center">
+            <div class="form_container text-center">
+                <form asp-action="AddRepairProcess" method="post">
+                    <input type="hidden" asp-for="AppointmentID" />
+                    <div>
+                        <input asp-for="RepairProcessDescription" class="form-control" placeholder="Tamir İşlemi" />
+                        <span asp-validation-for="RepairProcessDescription" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <input asp-for="RepairProcessTime" type="datetime-local" class="form-control" placeholder="Tamir Zamanı" />
+                        <span asp-validation-for="RepairProcessTime" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <input asp-for="ProcessPrice" type="number" class="form-control" placeholder="İşlem Fiyatı" />
+                        <span asp-validation-for="ProcessPrice" class="text-danger"></span>
+                    </div>
+
+                    <div class="btn_box">
+                        <button type="submit">
+                            <i class="fa-sharp fa-regular fa-floppy-disk" style="color: #ffffff;"></i>
+                            Kaydet
+                        </button>
+                    </div>
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="container mt-4">
+                            <div class="alert alert-success text-center" role="alert">
+                                @TempData["SuccessMessage"]
+                            </div>
+                        </div>
+                    }
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="container mt-4">
+                            <div class="alert alert-success text-center" role="alert">
+                                @TempData["ErrorMessage"]
+                            </div>
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</section>

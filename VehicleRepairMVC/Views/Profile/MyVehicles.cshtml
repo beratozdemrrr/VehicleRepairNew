@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "_SecondLayout";
+}
+
+@model IEnumerable<Car>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+
+<section class="client_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>ARAÇLARIM</h2>
+        </div>
+    </div>
+    @if (!Model.Any())
+    {
+        <div class="container">
+            <div class="alert alert-info text-center" role="alert">
+                Kullanıcıya ait onaylanmış randevu veya randevu bulunamadı!
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                @foreach (var car in Model)
+                {
+                    <div class="col-md-6 mb-4">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="~/template/images/admin.png" alt="">
+                            </div>
+                            <div class="detail-box mt-4">
+                                <div class="client_info">
+                                    <div class="client_name">
+                                        <h4 class="mt-4">Araç Sahibi: @Accessor?.HttpContext?.Session.GetString("Username")</h4>
+                                        <h4>Araç Plakası: @car.LicensePlate</h4>
+                                        <h4>Marka: @car.Brand @car.Model</h4>
+                                        <h4>Yıl: @car.Year</h4>
+
+                                    </div>
+                                    <i class="fa-solid fa-car" style="color: #2956a3;"></i>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</section>

@@ -1,0 +1,140 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+  <style>
+        .quote_btn-container {
+            display: flex;
+            align-items: center;
+        }
+        .quote_btn {
+            margin-right: 10px;
+        }
+
+        /* Custom Profile Menu */
+    .profile-menu {
+        position: relative;
+        display: inline-block;
+    }
+
+    .profile-menu-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        min-width: 160px;
+        text-align: center; /* Ortalayan stil */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+        .profile-menu-content a {
+            background-color: #f07b26; /* Arka plan rengi */
+            color: white; /* Yazı rengi */
+            padding: 5px 10px; /* Daha küçük padding */
+            text-decoration: none;
+            display: block;
+            font-size: 12px; /* Daha küçük yazı */
+            text-align: center; /* Metni ortalama */
+        }
+
+            .profile-menu-content a:hover {
+                background-color: #f1f1f1;
+            }
+
+    .profile-menu:hover .profile-menu-content {
+        display: block;
+    }
+    </style>
+ <!-- header section strats -->
+<header class="header_section">
+
+    <div class="header_bottom">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="/Home/Index">
+                    <img src="~/template/images/logoo.png" alt="">
+                </a>
+
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class=""> </span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    @if (ViewBag.IsLoggedIn != null && ViewBag.IsLoggedIn)
+                    {
+                        <ul class="navbar-nav  ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Home/Index">ANASAYFA <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=/Home/Index/#service_section>HİZMETLERİMİZ</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href=/Home/Index/#about>HAKKIMIZDA</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Products" asp-controller="Home">ÜRÜNLER</a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="Appointment" class="nav-link">RANDEVU İŞLEMİ</a>
+                            </li>
+                        </ul>
+                        <div class="quote_btn-container">
+                            <a asp-action="Index" asp-controller="Notification" class="quote_btn btn btn-primary mr-2">
+                                <i class="fa-solid fa-bell" style="color: #ffffff; margin-right:3px;"></i>
+                                BİLDİRİMLER
+                            </a>
+
+                            <!-- Dropdown Menu for Profile -->
+                            <div class="profile-menu">
+                                <button class="quote_btn btn btn-primary mr-2">
+                                    <i class="fa-solid fa-user" style="color: #ffffff; margin-right:3px;"></i>
+                                    PROFİL
+                                </button>
+                                <div class="profile-menu-content">
+                                    <a asp-action="MyAppointments" asp-controller="Profile">Randevularım</a>
+                                    <a asp-action="MyVehicles" asp-controller="Profile">Araçlarım</a>
+                                    <a asp-action="MyInvoice" asp-controller="Profile">Faturam</a>
+                                </div>
+                            </div>
+
+                            <a asp-action="Logout" asp-controller="Login" class="quote_btn">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                ÇIKIŞ YAP
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                             <ul class="navbar-nav  ">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/Home/Index">ANASAYFA <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href=#service_section>HİZMETLERİMİZ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href=#about>HAKKIMIZDA</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href=#product>ÜRÜNLER</a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" asp-action="AdminLogin" asp-controller="Login">ADMİN GİRİŞİ</a>
+                                </li>
+                            </ul>
+                            <div class="quote_btn-container">
+                                <a href="/Login/Index" class="quote_btn">
+                                    GİRİŞ YAP
+                                </a>
+                            </div>
+                    }
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<!-- end header section -->

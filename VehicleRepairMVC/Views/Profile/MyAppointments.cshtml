@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "_SecondLayout";
+}
+
+@model IEnumerable<Appointment>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+
+<section class="client_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>RANDEVULARIM</h2>
+        </div>
+    </div>
+
+     @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-light text-center" role="alert">
+                @TempData["ErrorMessage"]
+            </div>
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="container">
+            <div class="alert alert-info text-center" role="alert">
+                Kullanıcıya ait onaylanmış randevu veya randevu bulunamadı!
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                @foreach (var appointment in Model)
+                {
+                    <div class="col-md-6 mb-4">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="~/template/images/admin.png" alt="">
+                            </div>
+                            <div class="detail-box mt-4">
+                                <div class="client_info">
+                                    <div class="client_name">
+                                        <h4>Sayın @Accessor?.HttpContext?.Session.GetString("Username")</h4>
+                                        <h4>Aracınızın Plakası: @appointment.Car.LicensePlate</h4>
+                                        <h4>Araç Arıza: @appointment.Description</h4>
+                                        <h4>Randevu Durumu: @appointment.Status</h4>
+                                        <h4>Randevu Alma Tarihi: @appointment.CreatedAt.ToString("dd MMM yyyy HH:mm")</h4>
+                                        <h6 class="mt-4">RANDEVU TARİHİ: @appointment.AppointmentDate.ToString("dd MMM yyyy HH:mm")</h6>
+                                    </div>
+                                </div>
+                                @if(@appointment.Status=="Onaylandı"){
+                                <form method="post" asp-action="CancelAppointment" asp-controller="Profile" onsubmit="return confirm('Bu randevuyu iptal etmek istediğinize emin misiniz?');">
+                                    <input type="hidden" name="appointmentId" value="@appointment.AppointmentID" />
+                                    <button type="submit" class="btn btn-danger mt-3">
+                                        <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
+                                        Randevuyu İptal Et</button>
+                                </form>
+                                        }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</section>

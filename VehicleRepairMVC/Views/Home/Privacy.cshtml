@@ -1,0 +1,5 @@
+﻿@using Microsoft.AspNetCore.Http;  <!--Session işlemleri için using ve inject kullandık-->
+@inject IHttpContextAccessor Accessor
+
+
+<p>Siteye Hoşgeldin @Accessor?.HttpContext?.Session.GetString("Username")</p>

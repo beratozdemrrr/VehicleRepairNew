@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Appointment>
+@{
+    Layout = "_SecondLayout";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Appointments</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQERLDJ0VsRI18BMCLlD1fwCWq6LXD9sd9VjY6D3eFMCwfh5gS9k3q23U" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mt-5">Faturam</h2>
+        <table class="table table-bordered table-hover mt-3">
+            <thead>
+                <tr class="text-center">
+                    <th>Araç Plakası</th>
+                    <th>Randevu Tarihi</th>
+                    <th>Randevu Nedeni</th>
+                    <th>Tamirat</th>
+                    <th>Fatura Oluştur</th> <!-- Yeni sütun -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model)
+                {
+                    <tr class="text-center">
+                        <td>@appointment.Car.LicensePlate</td>
+                        <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                        <td>@appointment.Description</td>
+                        <td>
+                            @if (appointment.RepairProcesses != null && appointment.RepairProcesses.Any())
+                            {
+                                <ul>
+                                    @foreach (var repairProcess in appointment.RepairProcesses)
+                                    {
+                                        <li>@repairProcess.RepairProcessDescription - @repairProcess.ProcessPrice.ToString("C")</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <span>Henüz tamirat bilgisi yok.</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="PrintInvoice" asp-controller="Profile" asp-route-appointmentId="@appointment.AppointmentID" class="btn btn-danger">
+                                <i class="fa-regular fa-file-pdf"></i> Fatura Oluştur
+                            </a>
+                        </td> <!-- Yeni sütun -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6U5BQniib9gPj8ETMZyD2yA11yd90xT9WZJpJmO07yUXvYjPeSO" crossorigin="anonymous"></script>
+</body>
+</html>

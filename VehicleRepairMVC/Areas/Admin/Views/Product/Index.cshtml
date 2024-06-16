@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Product>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQERLDJ0VsRI18BMCLlD1fwCWq6LXD9sd9VjY6D3eFMCwfh5gS9k3q23U" crossorigin="anonymous">
+    <style>
+        .table-container {
+            margin-top: 50px;
+        }
+
+        .table-title {
+            margin-bottom: 30px;
+        }
+
+        .table th, .table td {
+            padding: 0.5rem;
+            vertical-align: middle;
+                }
+
+        .table th {
+            width: auto;
+        }
+
+        .small-col {
+            width: 5%;
+        }
+
+        .medium-col {
+            width: 7%;
+        }
+
+        .large-col {
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+<div class="container table-container"></div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <h2 class="display-6 text-center">Ürünler</h2>
+            <div class="d-flex justify-content-end mb-2">
+                <a asp-action="Create" asp-controller="Product" class="btn btn-success">
+                    <i class="fa fa-plus" style="color: #ffffff;"></i>
+                    Ürün Ekle
+                </a>
+            </div>
+<table class="table table-hover table-bordered mt-4">
+    <thead class="table-dark">
+            <tr class="text-center">
+                        <th class="small-col">Ürün</th>
+                        <th class="medium-col">Ürün Açıklaması</th>
+                        <th class="medium-col">Fiyat</th>
+                        <th class="small-col">Stok Miktarı</th>
+                        <th class="small-col">Stok Miktarı Güncelle</th>
+                        <th class="small-col">İşlem</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+                    @foreach (var product in Model)
+                    {
+                <tr>
+                    <td class="medium-col">@product.Name</td>
+                    <td class="large-col">@product.Description</td>
+                    <td class="small-col">@product.Price</td>
+                    <td class="small-col">@product.Stock</td>
+                            
+                                <form asp-action="UpdateStock" asp-controller="Product" method="post" >
+                                 <td class="small-col">
+                                <input type="hidden" name="productId" value="@product.ProductID" />
+                                <input type="number" name="newStock" class="form-control text-center" value="@product.Stock">
+                                </td>
+                                <td class="small-col">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-sharp fa-regular fa-floppy-disk" style="color: #ffffff;"></i>
+                                    Kaydet</button>
+                                </td>
+                            </form>
+                            
+                </tr>
+                    }
+    </tbody>
+</table>
+</div>
+</div>
+</body>
+</html>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6U5BQniib9gPj8ETMZyD2yA11yd90xT9WZJpJmO07yUXvYjPeSO" crossorigin="anonymous"></script>

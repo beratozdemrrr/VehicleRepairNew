@@ -1,0 +1,71 @@
+﻿@model IEnumerable<dynamic>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car User List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQERLDJ0VsRI18BMCLlD1fwCWq6LXD9sd9VjY6D3eFMCwfh5gS9k3q23U" crossorigin="anonymous">
+    <style>
+        .table-container {
+            margin-top: 50px;
+        }
+
+        .table-title {
+            margin-bottom: 30px;
+        }
+
+        .table th, .table td {
+            padding: 0.5rem;
+        }
+
+        .table th {
+            width: auto;
+        }
+
+        .small-col {
+            width: 5%;
+        }
+
+        .medium-col {
+            width: 7%;
+        }
+
+        .large-col {
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+<div class="container table-container"></div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <h2 class="display-6 text-center">Kullanıcılar</h2>
+<table class="table table-hover table-bordered mt-4">
+    <thead class="table-dark">
+            <tr class="text-center">
+                        <th class="small-col">Kullanıcı Adı</th>
+                        <th class="medium-col">Ad Soyad</th>
+                        <th class="medium-col">Marka</th>
+                        <th class="small-col">Yıl</th>
+                        <th class="medium-col">Plaka</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="small-col">@item.Username</td>
+                <td class="medium-col">@item.Firstname @item.Lastname</td>
+                <td class="medium-col">@item.Brand @item.Model</td>
+                <td class="small-col">@item.Year</td>
+                <td class="medium-col">@item.LicensePlate</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+</div>
+</body>
+</html>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6U5BQniib9gPj8ETMZyD2yA11yd90xT9WZJpJmO07yUXvYjPeSO" crossorigin="anonymous"></script>

@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+<div id="customCarousel1" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-10 mx-auto">
+                         @if (ViewBag.IsLoggedIn != null && ViewBag.IsLoggedIn)
+                        {
+                                 <div class="detail-box text-center">
+                                <h1>
+                                   SİTEYE HOŞGELDİN @Accessor?.HttpContext?.Session.GetString("Username")
+                                </h1>
+                                </div>
+                        }
+                        else{
+                        <div class="detail-box">
+                            <h1>
+                                ARAÇ TAMİR <br>
+                                RANDEVUSU İÇİN GİRİŞ YAPIN<br>
+                                HESABINIZ YOKSA KAYIT OLUN
+                            </h1>
+                            <div class="btn-box">
+                                <a href="/Login/Index" class="btn1">
+                                    Giriş Yap
+                                </a>
+                                <a href="/Login/Register" class="btn2">
+                                    Kayıt Ol
+                                </a>
+
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="carousel-item">
+        <div class="container ">
+        <div class="row">
+        <div class="col-md-10 mx-auto">
+        <div class="detail-box">
+        <h1>
+        ARCHITECT <br>
+        BUILDER CONSTRUCTION <br>
+        SERVICES
+        </h1>
+        <div class="btn-box">
+        <a href="" class="btn1">
+        Kullanıcı Girişi
+        </a>
+        <a href="" class="btn2">
+        Admin Girişi
+        </a>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <ol class="carousel-indicators">
+        <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+
+        </ol>*@
+    </div>
+</div>

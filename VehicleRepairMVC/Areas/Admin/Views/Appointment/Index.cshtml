@@ -1,0 +1,90 @@
+﻿@model IEnumerable<AppointmentViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointments</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQERLDJ0VsRI18BMCLlD1fwCWq6LXD9sd9VjY6D3eFMCwfh5gS9k3q23U" crossorigin="anonymous">
+    <style>
+        .table-container {
+            margin-top: 50px;
+        }
+        .table-title {
+            margin-bottom: 30px;
+        }
+        .table th, .table td {
+            padding: 0.5rem;
+            vertical-align: middle;
+        }
+        .table th {
+            width: auto;
+        }
+        .small-col {
+            width: 5%;
+        }
+        .medium-col {
+            width: 10%;
+        }
+        .large-col {
+            width: 15%;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container table-container">
+        <h2 class="table-title text-center">Randevu İstekleri</h2>
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+                <tr class="text-center align-middle">
+                    <th class="small-col">Kullanıcı Adı</th>
+                    <th class="medium-col">Randevu Zamanı</th>
+                    <th class="large-col">Arıza</th>
+                    <th class="small-col">Randevu Durumu</th>
+                    <th class="medium-col">Oluşturulma Tarihi</th>
+                    <th class="large-col">Yönetim</th> <!-- Ekleme ve Silme İşlemleri İçin -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center align-middle">
+                        <td class="small-col">@item.Username</td>
+                        <td class="medium-col">@item.AppointmentDate</td>
+                        <td class="large-col">@item.Description</td>
+                        <td class="medium-col">@item.Status</td>
+                        <td class="medium-col">@item.CreatedAt</td>
+                        <td class="large-col">
+                            <div class="d-flex justify-content-center">
+                            <div class="btn-group">
+                             <form method="post" asp-action="Approve" asp-controller="Appointment" asp-route-appointmentId="@item.AppointmentID">
+                                 <button type="submit" class="btn btn-success">
+                                    <i class="fa-sharp fa-solid fa-check" style="color: #ffffff;"></i>
+                                        Onayla
+                                    </button>
+                            </form>
+                            <form method="post" asp-action="Reject" asp-controller="Appointment" asp-route-appointmentId="@item.AppointmentID">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa-sharp fa-solid fa-xmark" style="color: #ffffff;"></i>
+                                    Reddet
+                                </button>
+                            </form>
+                            </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                
+                
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6U5BQniib9gPj8ETMZyD2yA11yd90xT9WZJpJmO07yUXvYjPeSO" crossorigin="anonymous"></script>
+</body>
+</html>
